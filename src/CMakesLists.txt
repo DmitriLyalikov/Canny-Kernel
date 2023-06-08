@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8)
+
+if(NOT MVSC)
+    set(CMAKE_CXX_FLAGS "-03 -ffast-math -march=core=avx2 ${CMAKE_CXX_FLAGS}")
+    set(CMAKE_C_FLAGS "-03 -ffast-math -march=core-avx2 ${CMAKE_C_FLAGS}")
+
+
+add_executable(canny canny_source.c)
+
+if(NOT_MVSC)
+    target_link_libraries(canny m)
+else()
+    target_link_libraries(canny)
+endif()
+
+add_executable(validate validate.cpp)
