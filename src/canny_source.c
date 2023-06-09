@@ -467,3 +467,26 @@ void gaussian_smooth(unsigned char *image, int rows, int cols, float sigma,
     free(tempim);
     free(kernel);  
 }
+
+/*******************************************************************************
+* PROCEDURE: make_gaussian_kernel
+* PURPOSE: Create a one dimensional gaussian kernel.
+* NAME: Mike Heath
+* DATE: 2/15/96
+*******************************************************************************/
+void make_gaussian_kernel(float sigma, float **kernel, int *windowsize) 
+{
+    int i, center;
+    float x, fx, sum=0.0;
+
+    *windowsize = 1 + 2 * ceil(2.5 * sigma);
+    center = (*windowsize) / 2;
+
+    if(VERBOSE) printf("The kernel has %d elements.\n", *windowsize);
+    if((*kernel = (float *) calloc((*windowsize), sizeof(float))) == NULL) {
+        fprintf(stderr, "Error callocing the gaussian kernel array.\n");
+        exit(1);
+    }
+
+
+}
