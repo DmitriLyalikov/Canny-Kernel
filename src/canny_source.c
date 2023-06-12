@@ -831,3 +831,4 @@ void non_max_supp(short *mag, short *gradx, short *grady, int nrows, int ncols,
         }
     }
 }
+
