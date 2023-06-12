@@ -16,11 +16,11 @@ _rgbtogrey:
     /*
      * Main code goes here
      */
-    li a4 0x3E99999A  // R Luminescence coefficient of .299
+    li a4 0x3E99999A  /* R Luminescence coefficient of .299 */
     mv f0 a4
-    li a4 0x3F02F983  // G Luminescence coefficient of .587
+    li a4 0x3F02F983  /* G Luminescence coefficient of .587 */
     mv f1 a4
-    li a4 0x3DC28F5C  // B Luminescence coefficient of .114
+    li a4 0x3DC28F5C  /* B Luminescence coefficient of .114 */
     mv f2 a4
     mv a3 a0 
 
