@@ -35,18 +35,21 @@ _rgbtogrey:
      * Main code goes here
      */
     li a3 0x3E99999A  // R Luminescence coefficient of .299
-    mv f0 a3
+    mv f0 a4
     li a3 0x3F02F983  // G Luminescence coefficient of .587
-    mv f1 a3
+    mv f1 a4
     li a3 0x3DC28F5C  // B Luminescence coefficient of .114
-    mv f2 a3
-    mv a4 a0 
+    mv f2 a4
+    mv a3 a0 
 
 loop:
     vsetvli t0, a2, 32     // set the vector length and t0 to min(a2, maxvl) vectors that are 32 bits wide
     vlseg3b.v  v1, (a1)    // load the 8-bit R values to v1 starting at src (a1) and 3 byte stride
     vlseg3b.v  v2, (a1)1   // load the 8-bit G values to v2 starting at src (a1) and 3 byte stride with offset 1 byte
     vlseg3b.v  v3, (a1)2   // load the 8-but B values to v3 starting at src (a1) and 3 byte stride with offset 2 bytes
+
+    add a1, a1, t0         // Bump the address pointer 
+    sub a2, a2, t0         // decrement count 
 
     vfcvt.s.i.v v1, v1
     vfcvt.s.i.v v2, v2
@@ -61,8 +64,9 @@ loop:
     vf.add.s v1, v1, v3      
 
     vfcvt.u.s v4, v4        // This is resulting 8-bit greyscale image 
+    
 
-
+    vsw.v v4, (a3) 
 /*
  * Section: Helper Functions
  */
